@@ -44,7 +44,7 @@ public class RutaMasCorta extends Archivo {
         dijkstra.escribirSolucionEnArchivo(this.salida, nodoFinal);
     }
 
-    public void resolve(){
+    public List<String> resolve(){
         int nodoInicial, nodoFinal;
         String ciudadInicial, ciudadFinal;
         List<String> route, flights = new ArrayList<>();
@@ -71,7 +71,7 @@ public class RutaMasCorta extends Archivo {
             System.out.println("Vuelo: "+flight);
         }
 
-
+        return flights;
         //dijkstra.escribirSolucionEnConsola(nodoFinal);
         //dijkstra.escribirSolucionEnArchivo(this.salida, nodoFinal);
     }

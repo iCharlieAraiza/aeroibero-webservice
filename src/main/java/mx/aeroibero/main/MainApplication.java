@@ -13,12 +13,12 @@ public class MainApplication {
     public static void main(String[] args) throws IOException {
         SpringApplication.run(MainApplication.class, args);
 
-        File entrada = new File("ciudades.in");
-        File salida = new File("rutaMasCorta.out");
+        //File entrada = new File("ciudades.in");
+        //File salida = new File("rutaMasCorta.out");
 
-        RutaMasCorta ruta = new RutaMasCorta(entrada, salida);
+        //RutaMasCorta ruta = new RutaMasCorta(entrada, salida);
         //ruta.resolver();
-        ruta.resolve();
+        //ruta.resolve();
     }
 
 }
