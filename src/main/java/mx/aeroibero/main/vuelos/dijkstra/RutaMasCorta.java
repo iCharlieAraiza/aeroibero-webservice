@@ -76,4 +76,32 @@ public class RutaMasCorta extends Archivo {
         //dijkstra.escribirSolucionEnArchivo(this.salida, nodoFinal);
     }
 
+    public List<String> resolve(String ciudadInicial, String ciudadFinal){
+        int nodoInicial, nodoFinal;
+        List<String> route, flights = new ArrayList<>();
+
+        nodoInicial = this.ciudades.getNumeroCiudad(ciudadInicial);
+        nodoFinal = this.ciudades.getNumeroCiudad(ciudadFinal);
+
+        AlgoritmoDijsktra dijkstra = new AlgoritmoDijsktra(this.ciudades, nodoInicial);
+        dijkstra.ejecutar();
+        route = dijkstra.getRoute(nodoFinal);
+
+        for(int i = 0; i< route.size(); i++){
+            String flight;
+            if(i>0){
+                flight = route.get(i-1) + " - " + route.get(i);
+                flights.add(flight);
+            }
+        }
+
+        for(String flight : flights){
+            System.out.println("Vuelo: "+flight);
+        }
+
+        return flights;
+        //dijkstra.escribirSolucionEnConsola(nodoFinal);
+        //dijkstra.escribirSolucionEnArchivo(this.salida, nodoFinal);
+    }
+
 }
