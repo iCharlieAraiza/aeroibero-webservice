@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -103,6 +104,20 @@ public class AlgoritmoDijsktra {
                 System.out.print(" " + this.grafo.getNombreCiudad(ciudadDeLaRuta));
             }
         }
+    }
+
+    public List<String> getRoute(int nodoFinal){
+        int distancia = costos.get(nodoFinal).getCostoMinimo();
+        List<String> route = new ArrayList<>();
+
+        if (distancia == INFINITO) {
+            return null;
+        } else {
+            for (Integer ciudadDeLaRuta : this.costos.get(nodoFinal).getCaminoMasCorto()) {
+                route.add(this.grafo.getNombreCiudad(ciudadDeLaRuta));
+            }
+        }
+        return route;
     }
 
     public void escribirSolucionEnArchivo(File salida, int nodoFinal) throws IOException {

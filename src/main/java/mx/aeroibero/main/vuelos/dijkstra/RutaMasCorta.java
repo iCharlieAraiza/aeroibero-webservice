@@ -1,6 +1,8 @@
 package mx.aeroibero.main.vuelos.dijkstra;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RutaMasCorta extends Archivo {
     private final CiudadesYRutas ciudades;
@@ -40,6 +42,38 @@ public class RutaMasCorta extends Archivo {
         dijkstra.ejecutar();
         dijkstra.escribirSolucionEnConsola(nodoFinal);
         dijkstra.escribirSolucionEnArchivo(this.salida, nodoFinal);
+    }
+
+    public void resolve(){
+        int nodoInicial, nodoFinal;
+        String ciudadInicial, ciudadFinal;
+        List<String> route, flights = new ArrayList<>();
+
+        ciudadInicial = "Mordor";
+        ciudadFinal = "Rivendel";
+
+        nodoInicial = this.ciudades.getNumeroCiudad(ciudadInicial);
+        nodoFinal = this.ciudades.getNumeroCiudad(ciudadFinal);
+
+        AlgoritmoDijsktra dijkstra = new AlgoritmoDijsktra(this.ciudades, nodoInicial);
+        dijkstra.ejecutar();
+        route = dijkstra.getRoute(nodoFinal);
+
+        for(int i = 0; i< route.size(); i++){
+            String flight;
+            if(i>0){
+                flight = route.get(i-1) + " - " + route.get(i);
+                flights.add(flight);
+            }
+        }
+
+        for(String flight : flights){
+            System.out.println("Vuelo: "+flight);
+        }
+
+
+        //dijkstra.escribirSolucionEnConsola(nodoFinal);
+        //dijkstra.escribirSolucionEnArchivo(this.salida, nodoFinal);
     }
 
 }

@@ -17,8 +17,8 @@ public class MainApplication {
         File salida = new File("rutaMasCorta.out");
 
         RutaMasCorta ruta = new RutaMasCorta(entrada, salida);
-        ruta.resolver();
-
+        //ruta.resolver();
+        ruta.resolve();
     }
 
 }
