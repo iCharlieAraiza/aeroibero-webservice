@@ -73,7 +73,8 @@ public class CiudadesYRutas {
         }
     }
 
-    public CiudadesYRutas(List<Flight> viajeList){
+
+    public CiudadesYRutas(List<Viaje> viajeList){
 
         this.cantCiudades = 0;
         this.cantRutas = 0;
@@ -83,10 +84,10 @@ public class CiudadesYRutas {
         String c1, c2;
         Queue<Ruta> rutas = new LinkedList<>();
 
-        for(Flight viaje : viajeList){
-            c1 = viaje.getFrom();
-            c2 = viaje.getTo();
-            distancia = (int) Math.round(viaje.getDistance());
+        for(Viaje viaje : viajeList){
+            c1 = viaje.getOrigen().getNombre();
+            c2 =viaje.getDestino().getNombre();
+            distancia = (int) Math.round(viaje.getDistancia());
 
             rutas.offer(new Ruta(c1, c2, distancia));
             this.cantRutas++;

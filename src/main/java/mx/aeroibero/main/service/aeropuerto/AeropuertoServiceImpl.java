@@ -17,4 +17,11 @@ public class AeropuertoServiceImpl implements AeropuertoService{
     public List<Aeropuerto> findAll() {
         return (List<Aeropuerto>) respository.findAll();
     }
+
+    @Override
+    public void save(Aeropuerto aeropuerto) {
+        respository.save(aeropuerto);
+    }
+
+
 }

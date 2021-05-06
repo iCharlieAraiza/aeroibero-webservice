@@ -28,6 +28,24 @@ public class Boleto {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss ")
     private Date fecha;
 
+    public Boleto() {
+    }
+
+    public Boleto(Long id, Cliente cliente, Viaje viaje, String status, String asiento) {
+        this.id = id;
+        this.cliente = cliente;
+        this.viaje = viaje;
+        this.status = status;
+        this.asiento = asiento;
+    }
+
+    public Boleto(Cliente cliente, Viaje viaje, String status, String asiento) {
+        this.cliente = cliente;
+        this.viaje = viaje;
+        this.status = status;
+        this.asiento = asiento;
+    }
+
     public Long getId() {
         return id;
     }

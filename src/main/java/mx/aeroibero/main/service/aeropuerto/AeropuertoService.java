@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface AeropuertoService {
     List<Aeropuerto> findAll ();
+    void save(Aeropuerto aeropuerto);
 }

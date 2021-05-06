@@ -1,7 +1,10 @@
 package mx.aeroibero.main.vuelos.controller;
 
+import mx.aeroibero.main.entity.Viaje;
+import mx.aeroibero.main.service.viaje.ViajeService;
 import mx.aeroibero.main.vuelos.dijkstra.RutaMasCorta;
 import mx.aeroibero.main.vuelos.domain.Flight;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/vuelos")
 public class VuelosController {
+
+    private ViajeService viajeService;
+
+    public VuelosController(ViajeService viajeService) {
+        this.viajeService = viajeService;
+    }
+
     @GetMapping("/prueba")
     public List<String> routes() throws FileNotFoundException {
         File entrada = new File("ciudades.in");
@@ -50,8 +60,11 @@ public class VuelosController {
 
          */
 
-        List<String> flights = new ArrayList<>();
-        return  flights;
+        List<Viaje> flights;
+        flights = viajeService.findAll();
+
+        RutaMasCorta ruta = new RutaMasCorta(flights);
+        return ruta.resolve(from, to);
     }
 
 }

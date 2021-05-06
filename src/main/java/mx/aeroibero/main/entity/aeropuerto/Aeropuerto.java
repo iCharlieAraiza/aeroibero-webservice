@@ -16,6 +16,14 @@ public class Aeropuerto {
     @JoinColumn(name = "id_CiudadFK")
     private Ciudad idCiudadFK;
 
+    public Aeropuerto() { }
+
+    public Aeropuerto(Long id, String nombre, Ciudad idCiudadFK) {
+        this.id = id;
+        this.nombre = nombre;
+        this.idCiudadFK = idCiudadFK;
+    }
+
     public Long getId() {
         return id;
     }

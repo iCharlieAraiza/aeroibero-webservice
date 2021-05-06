@@ -22,9 +22,22 @@ public class Viaje {
     private Aeropuerto destino;
 
     private String tipo_Viaje;
-    private Double distancia;
-    private Time tiempo_Total;
-    private Double Costo;
+    private Long distancia;
+    private Long tiempo_Total;
+    private Long Costo;
+
+    public Viaje(){
+
+    }
+
+    public Viaje(Long id, Aeropuerto origen, Aeropuerto destino, Long distancia, Long tiempo_Total, Long costo) {
+        this.id = id;
+        this.origen = origen;
+        this.destino = destino;
+        this.distancia = distancia;
+        this.tiempo_Total = tiempo_Total;
+        Costo = costo;
+    }
 
     public Long getId() {
         return id;
@@ -58,27 +71,27 @@ public class Viaje {
         this.tipo_Viaje = tipo_Viaje;
     }
 
-    public Double getDistancia() {
+    public Long getDistancia() {
         return distancia;
     }
 
-    public void setDistancia(Double distancia) {
+    public void setDistancia(Long distancia) {
         this.distancia = distancia;
     }
 
-    public Time getTiempo_Total() {
+    public Long getTiempo_Total() {
         return tiempo_Total;
     }
 
-    public void setTiempo_Total(Time tiempo_Total) {
+    public void setTiempo_Total(Long tiempo_Total) {
         this.tiempo_Total = tiempo_Total;
     }
 
-    public Double getCosto() {
+    public Long getCosto() {
         return Costo;
     }
 
-    public void setCosto(Double costo) {
+    public void setCosto(Long costo) {
         Costo = costo;
     }
 

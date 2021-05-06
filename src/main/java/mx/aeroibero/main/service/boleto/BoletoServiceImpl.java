@@ -1,7 +1,7 @@
 package mx.aeroibero.main.service.boleto;
 
 import mx.aeroibero.main.entity.Boleto;
-import mx.aeroibero.main.repository.BoletoRepository;
+import mx.aeroibero.main.repository.boleto.BoletoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

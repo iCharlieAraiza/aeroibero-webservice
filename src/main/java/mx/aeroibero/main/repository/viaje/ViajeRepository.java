@@ -1,4 +1,4 @@
-package mx.aeroibero.main.repository;
+package mx.aeroibero.main.repository.viaje;
 
 import mx.aeroibero.main.entity.Viaje;
 import org.springframework.data.repository.CrudRepository;

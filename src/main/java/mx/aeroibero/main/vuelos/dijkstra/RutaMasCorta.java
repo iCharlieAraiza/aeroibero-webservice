@@ -17,7 +17,8 @@ public class RutaMasCorta extends Archivo {
         this.cantCiudades = this.ciudades.getCantNodos();
     }
 
-    public RutaMasCorta(List<Flight> viajeList){
+
+    public RutaMasCorta(List<Viaje> viajeList){
         this.ciudades = new CiudadesYRutas(viajeList);
         this.cantCiudades = this.ciudades.getCantNodos();
     }
