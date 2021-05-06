@@ -8,6 +8,7 @@ import mx.aeroibero.main.entity.aeropuerto.Pais;
 import mx.aeroibero.main.entity.cliente.Cliente;
 import mx.aeroibero.main.repository.aeropuerto.CiudadRepository;
 import mx.aeroibero.main.repository.aeropuerto.PaisRepository;
+import mx.aeroibero.main.repository.viaje.ViajeRepository;
 import mx.aeroibero.main.service.aeropuerto.AeropuertoService;
 import mx.aeroibero.main.service.boleto.BoletoService;
 import mx.aeroibero.main.service.cliente.ClienteService;
@@ -34,6 +35,8 @@ public class BootStrapData implements CommandLineRunner {
     private ViajeService viajeService;
     @Autowired
     private BoletoService boletoService;
+    @Autowired
+    private ViajeRepository viajeRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -45,6 +48,10 @@ public class BootStrapData implements CommandLineRunner {
 
         //createFlightTicket();
         showViajes();
+        getAirport();
+
+        FindViajeByAirports();
+        findAirportByName();
     }
 
     public void initCliente(){
@@ -173,6 +180,22 @@ public class BootStrapData implements CommandLineRunner {
         List<Viaje> viajeList = viajeService.findAll();
 
         viajeList.forEach(viaje -> System.out.println(viaje.getOrigen().getNombre()));
+    }
+
+    public void getAirport(){
+        Aeropuerto aeropuerto = aeropuertoService.findById(2L);
+        System.out.println("Aeropuerto 2L: " + aeropuerto.getNombre());
+    }
+
+    public void FindViajeByAirports(){
+        Viaje viajes = viajeRepository.findByOrigenAndAndDestino(aeropuertoService.findById(6L),aeropuertoService.findById(3L));
+        //viajes.forEach(e-> System.out.println("prueba: " + e.getDestino().getNombre()));
+        System.out.println(viajes.toString());
+    }
+
+    public void findAirportByName(){
+        Aeropuerto aeropuerto = aeropuertoService.findByNombre("Caballo Verde");
+        System.out.println("Resultado!! " + aeropuerto.getNombre());
     }
 
 }

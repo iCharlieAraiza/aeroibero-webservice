@@ -1,6 +1,7 @@
 package mx.aeroibero.main.service.viaje;
 
 import mx.aeroibero.main.entity.Viaje;
+import mx.aeroibero.main.entity.aeropuerto.Aeropuerto;
 import mx.aeroibero.main.repository.viaje.ViajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class ViajeServiceImpl implements ViajeService{
     public Viaje findById(Long id) {
         Viaje viaje = repository.findById(id).get();
         return viaje;
+    }
+
+    @Override
+    public Viaje findByOrigenAndDestino(Aeropuerto origen, Aeropuerto destino) {
+        return repository.findByOrigenAndAndDestino(origen,destino);
     }
 
 

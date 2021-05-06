@@ -1,15 +1,25 @@
 package mx.aeroibero.main.vuelos.dijkstra;
 
 import mx.aeroibero.main.entity.Viaje;
+import mx.aeroibero.main.entity.aeropuerto.Aeropuerto;
+import mx.aeroibero.main.service.aeropuerto.AeropuertoService;
+import mx.aeroibero.main.service.viaje.ViajeService;
 import mx.aeroibero.main.vuelos.domain.Flight;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class RutaMasCorta extends Archivo {
-    private final CiudadesYRutas ciudades;
-    private final int cantCiudades;
+    @Autowired
+    private AeropuertoService aeropuertoService;
+
+    private CiudadesYRutas ciudades;
+    private  int cantCiudades = 0;
+
+    public RutaMasCorta(){ }
 
     public RutaMasCorta(File entrada, File salida) throws FileNotFoundException {
         super(entrada, salida);
@@ -22,7 +32,6 @@ public class RutaMasCorta extends Archivo {
         this.ciudades = new CiudadesYRutas(viajeList);
         this.cantCiudades = this.ciudades.getCantNodos();
     }
-
     @Override
     public void resolver() throws IOException {
         int nodoInicial, nodoFinal;
@@ -111,6 +120,70 @@ public class RutaMasCorta extends Archivo {
         return flights;
         //dijkstra.escribirSolucionEnConsola(nodoFinal);
         //dijkstra.escribirSolucionEnArchivo(this.salida, nodoFinal);
+    }
+
+
+    public List<String> resolve(int idFrom, int idTo){
+        int nodoInicial, nodoFinal;
+        List<String> route, flights = new ArrayList<>();
+
+        String ciudadInicial, ciudadFinal;
+
+        ciudadInicial = aeropuertoService.findById(1L).getNombre();
+        ciudadFinal = aeropuertoService.findById(5L).getNombre();
+
+        nodoInicial = this.ciudades.getNumeroCiudad(ciudadInicial);
+        nodoFinal = this.ciudades.getNumeroCiudad(ciudadFinal);
+
+        AlgoritmoDijsktra dijkstra = new AlgoritmoDijsktra(this.ciudades, nodoInicial);
+        dijkstra.ejecutar();
+        route = dijkstra.getRoute(nodoFinal);
+
+        for(int i = 0; i< route.size(); i++){
+            String flight;
+            if(i>0){
+                flight = route.get(i-1) + " - " + route.get(i);
+                flights.add(flight);
+            }
+        }
+
+        for(String flight : flights){
+            System.out.println("Vuelo: "+flight);
+        }
+
+        return flights;
+        //dijkstra.escribirSolucionEnConsola(nodoFinal);
+        //dijkstra.escribirSolucionEnArchivo(this.salida, nodoFinal);
+    }
+
+    public List<Viaje> resolve(String ciudadInicial, String ciudadFinal, ViajeService service, AeropuertoService aeropuertoService){
+        int nodoInicial, nodoFinal;
+        List<String> route, flights = new ArrayList<>();
+        List<Viaje> viajeList = new ArrayList<>();
+
+        nodoInicial = this.ciudades.getNumeroCiudad(ciudadInicial);
+        nodoFinal = this.ciudades.getNumeroCiudad(ciudadFinal);
+
+        AlgoritmoDijsktra dijkstra = new AlgoritmoDijsktra(this.ciudades, nodoInicial);
+        dijkstra.ejecutar();
+        route = dijkstra.getRoute(nodoFinal);
+
+        for(int i = 0; i< route.size(); i++){
+            Aeropuerto origen, destino;
+            if(i>0){
+
+                origen = aeropuertoService.findByNombre(route.get(i-1) );
+                destino = aeropuertoService.findByNombre(route.get(i) );
+                viajeList.add( service.findByOrigenAndDestino(origen, destino) );
+                //flight = service.findByOrigenAndDestino();
+                //flight = route.get(i-1) + " - " + route.get(i);
+
+                //flights.add(flight);
+            }
+        }
+
+
+        return viajeList;
     }
 
 }

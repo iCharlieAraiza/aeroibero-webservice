@@ -1,6 +1,8 @@
 package mx.aeroibero.main.vuelos.controller;
 
 import mx.aeroibero.main.entity.Viaje;
+import mx.aeroibero.main.entity.aeropuerto.Aeropuerto;
+import mx.aeroibero.main.service.aeropuerto.AeropuertoService;
 import mx.aeroibero.main.service.viaje.ViajeService;
 import mx.aeroibero.main.vuelos.dijkstra.RutaMasCorta;
 import mx.aeroibero.main.vuelos.domain.Flight;
@@ -19,6 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/vuelos")
 public class VuelosController {
+    @Autowired
+    public AeropuertoService aeropuertoService;
 
     private ViajeService viajeService;
 
@@ -65,6 +69,22 @@ public class VuelosController {
 
         RutaMasCorta ruta = new RutaMasCorta(flights);
         return ruta.resolve(from, to);
+    }
+
+    @GetMapping("/prueba/id/{from}/{to}")
+    public List<Viaje> routesById(@PathVariable( value = "from") Integer from,@PathVariable( value = "to") Integer to , Model model) {
+
+        //System.out.println(from);
+        List<Viaje> flights;
+        flights = viajeService.findAll();
+
+        RutaMasCorta ruta = new RutaMasCorta(flights);
+
+        Aeropuerto aeropuertoTo = aeropuertoService.findById((long) to);
+        Aeropuerto aeropuertoFrom = aeropuertoService.findById((long) from);
+
+        return ruta.resolve( aeropuertoFrom.getNombre(), aeropuertoTo.getNombre(),viajeService, aeropuertoService);
+        //return null;
     }
 
 }

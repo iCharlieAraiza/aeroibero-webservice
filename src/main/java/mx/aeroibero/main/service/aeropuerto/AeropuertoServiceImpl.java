@@ -23,5 +23,15 @@ public class AeropuertoServiceImpl implements AeropuertoService{
         respository.save(aeropuerto);
     }
 
+    @Override
+    public Aeropuerto findById(Long id) {
+        return respository.findById(id).get();
+    }
+
+    @Override
+    public Aeropuerto findByNombre(String name) {
+        return respository.findByNombre(name);
+    }
+
 
 }

@@ -140,6 +140,9 @@ public class CiudadesYRutas {
     public int getNumeroCiudad(String nombreCiudad) {
         return this.ciudades.indexOf(nombreCiudad);
     }
+    public int getNumeroCiudad(int nombreCiudad) {
+        return this.ciudades.indexOf(nombreCiudad);
+    }
 
     public String getNombreCiudad(int numeroCiudad) {
         return this.ciudades.get(numeroCiudad);
