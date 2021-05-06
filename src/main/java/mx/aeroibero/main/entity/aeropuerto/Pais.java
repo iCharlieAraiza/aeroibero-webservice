@@ -12,6 +12,15 @@ public class Pais {
 
     private String nombre;
 
+    public Pais(){
+
+    }
+
+    public Pais(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public Long getId() {
         return id;
     }
@@ -27,6 +36,8 @@ public class Pais {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+
 
     @Override
     public String toString() {

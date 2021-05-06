@@ -22,6 +22,16 @@ public class Ciudad {
     @JoinColumn(name = "id_PaisFK")
     private Pais pais;
 
+
+    public Ciudad() {
+    }
+
+    public Ciudad(Long id, String nombre, Pais pais) {
+        this.id = id;
+        this.nombre = nombre;
+        this.pais = pais;
+    }
+
     public Long getId() {
         return id;
     }

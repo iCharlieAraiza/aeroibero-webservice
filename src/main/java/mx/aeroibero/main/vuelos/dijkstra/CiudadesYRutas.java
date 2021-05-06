@@ -1,14 +1,13 @@
 package mx.aeroibero.main.vuelos.dijkstra;
 
 import lombok.Data;
+import mx.aeroibero.main.entity.Viaje;
+import mx.aeroibero.main.vuelos.domain.Flight;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 @Data
 public class CiudadesYRutas {
@@ -73,6 +72,61 @@ public class CiudadesYRutas {
             this.grafo.ponerArista(indice);
         }
     }
+
+    public CiudadesYRutas(List<Flight> viajeList){
+
+        this.cantCiudades = 0;
+        this.cantRutas = 0;
+        this.ciudades = new ArrayList<>();
+
+        int ciudadOne, ciudadTwo, distancia, indice;
+        String c1, c2;
+        Queue<Ruta> rutas = new LinkedList<>();
+
+        for(Flight viaje : viajeList){
+            c1 = viaje.getFrom();
+            c2 = viaje.getTo();
+            distancia = (int) Math.round(viaje.getDistance());
+
+            rutas.offer(new Ruta(c1, c2, distancia));
+            this.cantRutas++;
+
+            if (!this.ciudades.contains(c1)) {
+                this.ciudades.add(c1);
+                this.cantCiudades++;
+            }
+            if (!this.ciudades.contains(c2)) {
+                this.ciudades.add(c2);
+                this.cantCiudades++;
+            }
+
+        }
+
+
+        this.grafo = new MatrizSimetrica(this.cantCiudades);
+        int dimensionLongitudRutas = (this.cantCiudades * this.cantCiudades - this.cantCiudades) / 2;
+        longitudRutas = new int[dimensionLongitudRutas];
+
+        Ruta ruta;
+        while (!rutas.isEmpty()) {
+            ruta = rutas.poll();
+            c1 = ruta.getCiudadOne();
+            c2 = ruta.getCiudadTwo();
+            distancia = ruta.getLongitud();
+
+            ciudadOne = this.ciudades.indexOf(c1);
+            ciudadTwo = this.ciudades.indexOf(c2);
+            if (ciudadOne < ciudadTwo) {
+                indice = this.grafo.getIndice(ciudadOne, ciudadTwo);
+            } else {
+                indice = this.grafo.getIndice(ciudadTwo, ciudadOne);
+            }
+
+            this.longitudRutas[indice] = distancia;
+            this.grafo.ponerArista(indice);
+        }
+    }
+
 
     public int getCantNodos() {
         return cantCiudades;

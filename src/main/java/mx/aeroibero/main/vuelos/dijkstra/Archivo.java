@@ -12,5 +12,7 @@ public abstract class Archivo {
         this.salida = salida;
     }
 
+    public Archivo(){}
+
     public abstract void resolver() throws IOException;
 }

@@ -1,5 +1,8 @@
 package mx.aeroibero.main.vuelos.dijkstra;
 
+import mx.aeroibero.main.entity.Viaje;
+import mx.aeroibero.main.vuelos.domain.Flight;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,11 @@ public class RutaMasCorta extends Archivo {
     public RutaMasCorta(File entrada, File salida) throws FileNotFoundException {
         super(entrada, salida);
         this.ciudades = new CiudadesYRutas(this.entrada);
+        this.cantCiudades = this.ciudades.getCantNodos();
+    }
+
+    public RutaMasCorta(List<Flight> viajeList){
+        this.ciudades = new CiudadesYRutas(viajeList);
         this.cantCiudades = this.ciudades.getCantNodos();
     }
 

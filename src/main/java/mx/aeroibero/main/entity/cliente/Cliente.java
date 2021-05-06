@@ -19,8 +19,20 @@ public class Cliente {
     private String nombre;
     private String paterno;
     private String materno;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date nacimiento;
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String nacimiento;
+
+
+    public Cliente(){
+
+    }
+
+    public Cliente(Long id, String nombre, String paterno, String nacimiento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.paterno = paterno;
+        this.nacimiento = nacimiento;
+    }
 
     public Long getId() {
         return id;
@@ -54,11 +66,11 @@ public class Cliente {
         this.materno = materno;
     }
 
-    public Date getNacimiento() {
+    public String getNacimiento() {
         return nacimiento;
     }
 
-    public void setNacimiento(Date nacimiento) {
+    public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
 
