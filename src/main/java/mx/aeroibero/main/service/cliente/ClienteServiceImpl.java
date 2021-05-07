@@ -30,4 +30,9 @@ public class ClienteServiceImpl implements ClienteService{
     public void save(Cliente cliente) {
         repository.save(cliente);
     }
+
+    @Override
+    public Cliente saveCliente(Cliente cliente) {
+        return repository.save(cliente);
+    }
 }

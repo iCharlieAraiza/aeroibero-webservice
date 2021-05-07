@@ -21,6 +21,8 @@ public class Cliente {
     private String materno;
     //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private String nacimiento;
+    private String nacionalidad;
+    private String raza;
 
 
     public Cliente(){
@@ -72,6 +74,22 @@ public class Cliente {
 
     public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
+    }
+
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getRaza() {
+        return raza;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
     }
 
     @Override

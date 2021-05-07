@@ -8,10 +8,7 @@ import mx.aeroibero.main.vuelos.dijkstra.RutaMasCorta;
 import mx.aeroibero.main.vuelos.domain.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,7 +33,7 @@ public class VuelosController {
         File salida = new File("rutaMasCorta.out");
         RutaMasCorta ruta = new RutaMasCorta(entrada, salida);
 
-        return ruta.resolve("Rivendel","Mordor");
+        return ruta.resolve("Moria","Charn");
     }
 
     @GetMapping("/prueba/{from}/{to}")
@@ -71,6 +68,7 @@ public class VuelosController {
         return ruta.resolve(from, to);
     }
 
+    @CrossOrigin
     @GetMapping("/prueba/id/{from}/{to}")
     public List<Viaje> routesById(@PathVariable( value = "from") Integer from,@PathVariable( value = "to") Integer to , Model model) {
 

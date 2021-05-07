@@ -52,6 +52,8 @@ public class BootStrapData implements CommandLineRunner {
 
         FindViajeByAirports();
         findAirportByName();
+
+        checkValue();
     }
 
     public void initCliente(){
@@ -196,6 +198,16 @@ public class BootStrapData implements CommandLineRunner {
     public void findAirportByName(){
         Aeropuerto aeropuerto = aeropuertoService.findByNombre("Caballo Verde");
         System.out.println("Resultado!! " + aeropuerto.getNombre());
+    }
+
+    public void checkValue(){
+        Aeropuerto origen = aeropuertoService.findByNombre("Mago Blanco");
+        Aeropuerto destino = aeropuertoService.findByNombre("Caballo Verde");
+
+        //Viaje viaje = viajeRepository.findByOrigenAndAndDestino(origen, destino);
+
+        System.out.println(origen.getId() +" "+origen.getNombre());
+        System.out.println(destino.getId()+" "+destino.getNombre());
     }
 
 }

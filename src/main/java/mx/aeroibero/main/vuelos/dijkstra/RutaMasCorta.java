@@ -174,7 +174,14 @@ public class RutaMasCorta extends Archivo {
 
                 origen = aeropuertoService.findByNombre(route.get(i-1) );
                 destino = aeropuertoService.findByNombre(route.get(i) );
-                viajeList.add( service.findByOrigenAndDestino(origen, destino) );
+
+
+                System.out.println("Origen: "+origen.getNombre()+" Destino: "+destino.getNombre());
+                Viaje viaje = service.findByOrigenAndDestino(origen, destino);
+                if(viaje!=null){
+                    viajeList.add( service.findByOrigenAndDestino(origen, destino) );
+                }
+
                 //flight = service.findByOrigenAndDestino();
                 //flight = route.get(i-1) + " - " + route.get(i);
 
