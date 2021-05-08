@@ -21,13 +21,13 @@ public class ClienteController {
         return clienteService.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public Object showCLienteById(@PathVariable( value = "id") Long id){
         Cliente cliente = clienteService.findByID(id);
         if(cliente==null)
             return null;
         return cliente;
-
     }
 
     @CrossOrigin

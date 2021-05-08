@@ -25,4 +25,9 @@ public class BoletoServiceImpl implements BoletoService {
     public void save(Boleto boleto) {
         repository.save(boleto);
     }
+
+    @Override
+    public Boleto saveBoleto(Boleto boleto) {
+        return repository.save(boleto);
+    }
 }

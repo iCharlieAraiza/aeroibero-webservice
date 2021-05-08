@@ -23,6 +23,8 @@ public class Cliente {
     private String nacimiento;
     private String nacionalidad;
     private String raza;
+    private String email;
+    private String telefono;
 
 
     public Cliente(){
@@ -92,6 +94,22 @@ public class Cliente {
         this.raza = raza;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
@@ -99,7 +117,11 @@ public class Cliente {
                 ", nombre='" + nombre + '\'' +
                 ", paterno='" + paterno + '\'' +
                 ", materno='" + materno + '\'' +
-                ", nacimiento=" + nacimiento +
+                ", nacimiento='" + nacimiento + '\'' +
+                ", nacionalidad='" + nacionalidad + '\'' +
+                ", raza='" + raza + '\'' +
+                ", email='" + email + '\'' +
+                ", telefono='" + telefono + '\'' +
                 '}';
     }
 }
